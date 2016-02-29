@@ -53,9 +53,10 @@
                                  [ring/ring-mock "0.3.0"]
                                  [ring/ring-devel "1.4.0"]
                                  [pjstadig/humane-test-output "0.7.1"]
-                                 [mvxcvi/puget "1.0.0"]]
-                  
-                  
+                                 [mvxcvi/puget "1.0.0"]
+                                 [yesql "0.5.2"]]
+
+
                   :source-paths ["env/dev/clj" "test/clj"]
                   :resource-paths ["env/dev/resources"]
                   :repl-options {:init-ns user}
@@ -68,5 +69,5 @@
    :project/test {:env {:test       true
                         :port       3001
                         :nrepl-port 7001}}
-   :profiles/dev {}
-   :profiles/test {}})
+   :profiles/dev {:env {:database-url "jdbc:h2:./guestbook_dev.db" }}
+   :profiles/test {:env {:database-url "jdbc:h2:./guestbook_test.db"}}})

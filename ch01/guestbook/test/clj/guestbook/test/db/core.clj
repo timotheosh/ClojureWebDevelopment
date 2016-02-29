@@ -1,5 +1,5 @@
 (ns guestbook.test.db.core
-  (:require [guestbook.db.core :refer [*db*] :as db]
+  (:require [guestbook.db.core :as db]
             [guestbook.db.migrations :as migrations]
             [clojure.test :refer :all]
             [clojure.java.jdbc :as jdbc]
@@ -9,26 +9,26 @@
 (use-fixtures
   :once
   (fn [f]
-    (mount/start #'guestbook.db.core/*db*)
-    (migrations/migrate ["migrate"])
-    (f)))
+    (migrations/migrate(f)))
+  ["migrate"])
 
-(deftest test-users
-  (jdbc/with-db-transaction [t-conn *db*]
+(deftest test-messages
+  (jdbc/with-db-transaction [t-conn db/conn]
     (jdbc/db-set-rollback-only! t-conn)
-    (is (= 1 (db/create-user!
-               t-conn
-               {:id         "1"
-                :first_name "Sam"
-                :last_name  "Smith"
-                :email      "sam.smith@example.com"
-                :pass       "pass"})))
-    (is (= {:id         "1"
-            :first_name "Sam"
-            :last_name  "Smith"
-            :email      "sam.smith@example.com"
-            :pass       "pass"
-            :admin      nil
-            :last_login nil
-            :is_active  nil}
-           (db/get-user t-conn {:id "1"})))))
+    (let [timestamp (java.util.Date.)]
+      (is (= 1 (db/save-message!
+                {:name
+                 "Bob"
+                 :message
+                 "Hello World"
+                 :timestamp timestamp}
+                {:connection t-conn})))
+      (is (=
+           {:name
+            "Bob"
+            :message
+            "Hello World"
+            :timestamp timestamp}
+           (-> (db/get-messages {} {:connection t-conn})
+               first
+               (select-keys [:name :message :timestamp])))))))
