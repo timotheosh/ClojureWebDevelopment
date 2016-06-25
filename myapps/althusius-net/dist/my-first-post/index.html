@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html><head><meta charset="utf-8" /><meta content="width=device-width, initial-scale=1.0" name="viewport" /><title>Tech blog</title><link href="/94cfb67e283b/styles/main.css" rel="stylesheet" /></head><body><div class="logo">Althusius.net</div><div class="body"><h1>My first post</h1><p>It's pretty short for now. Here's our project.clj:</p>
+<pre><code class="codehilite"><span class="p">(</span><span class="kd">defproject </span><span class="nv">althusius-net</span> <span class="s">"0.1.0-SNAPSHOT"</span>
+  <span class="ss">:description</span> <span class="s">"Althusius.net Website"</span>
+  <span class="ss">:url</span> <span class="s">"http://althusius.net"</span>
+  <span class="ss">:license</span> <span class="p">{</span><span class="ss">:name</span> <span class="s">"Apache 2.0"</span>
+            <span class="ss">:url</span> <span class="s">"https://opensource.org/licenses/Apache-2.0"</span><span class="p">}</span>
+  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">"1.8.0"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">stasis</span> <span class="s">"1.0.0"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">ring</span> <span class="s">"1.2.1"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">hiccup</span> <span class="s">"1.0.5"</span><span class="p">]</span>
+                 <span class="p">[</span><span class="nv">me.raynes/cegdown</span> <span class="s">"0.1.1"</span><span class="p">]]</span>
+  <span class="ss">:ring</span> <span class="p">{</span><span class="ss">:handler</span> <span class="nv">althusius-net.web/app</span><span class="p">}</span>
+  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">lein-ring</span> <span class="s">"0.8.10"</span><span class="p">]]}})</span>
+</code></pre></div></body></html>
